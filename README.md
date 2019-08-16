@@ -22,29 +22,29 @@
 > 2.2 需要关注的配置项
 * java代码配置文件application.properties
     ```html
-    修改为自己的redis地址
+    //修改为自己的redis地址
     spring.redis.host=127.0.0.1
     spring.redis.port=6379
     spring.redis.password=password
     
-    修改为自己的mysql地址
+    //修改为自己的mysql地址
     spring.datasource.url=jdbc:mysql://127.0.0.1:3306/shorturl?useSSL=false&useUnicode=true&characterEncoding=utf8
     spring.datasource.username=root
     spring.datasource.password=password
     
-    邮箱配置，用于发送通知（验证码、注册邮件等）
+    //邮箱配置，用于发送通知（验证码、注册邮件等）
     spring.mail.host=smtp.aliyun.com
     spring.mail.port=465
     spring.mail.username=name@aliyun.com
     spring.mail.password=password
     
-    邮件提醒地址（用户生成短网址后提醒管理员审核）
+    //邮件提醒地址（用户生成短网址后提醒管理员审核）
     system.reminderMail=123456@qq.com,12345678@qq.com
     
-    短网址域名
+    //短网址域名
     system.domain=url.com
     
-    IP信息查询  官网http://user.ip138.com/   token需要去官网注册获取
+    //IP信息查询  官网http://user.ip138.com/   token需要去官网注册获取
     ip138.token=******
     ```
 * html页面需要修改的配置（将域名url.com替换为自己的一级域名）
