@@ -48,10 +48,11 @@
     ip138.token=******
     ```
 * html页面需要修改的配置
-    ```html
-    html->js->common.js第一行修改为自己域名（一级域名）
-    var domain = "url.com";
-    ```
+    将域名url.com修改为自己的域名
+    html->js->common.js第二行
+    html->js->checkUrl.js第一行
+    html->files->接口文档.doc
+    
 * 软件环境：mysql、redis、nginx、JDK1.8
     
 
