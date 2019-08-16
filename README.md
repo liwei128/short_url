@@ -1,6 +1,6 @@
 ## 短网址服务平台
 效果演示 <http://www.c1n.cn>或<http://www.lw0.cn>
-### 1、功能介绍
+### 功能介绍
 
 > 1.1 短网址生成，支持自定义域名和网址，登录用户生成的短网址永久有效。
 
@@ -14,7 +14,7 @@
 
 [![url](https://raw.githubusercontent.com/liwei128/short_url/master/img/flowData.png)](https://raw.githubusercontent.com/liwei128/short_url/master/img/flowData.png)
 
-### 2、快速部署
+### 快速部署
 > 2.1 环境准备
 * 申请域名（需备案）
 * 服务器资源
