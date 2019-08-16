@@ -56,7 +56,7 @@
 * nginx配置
     * 配置示例nginx_config->url.conf
     * 将域名url.com替换为自己的一级域名
-    * nginx_config->url.conf第43行修改前端文件地址
+    * nginx_config->url.conf第41行修改前端文件地址
 * 域名解析配置示例
     ```html
     *.url.com 127.0.0.1
