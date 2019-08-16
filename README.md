@@ -20,7 +20,7 @@
 * 服务器资源
 * 软件环境：mysql、redis、nginx、JDK1.8
 > 2.2 需要关注的配置项
-* java代码(java_code文件夹)配置文件application.properties
+* java代码配置文件application.properties
     ```html
     修改为自己的redis地址
     spring.redis.host=127.0.0.1
@@ -47,7 +47,11 @@
     IP信息查询  官网http://user.ip138.com/   token需要去官网注册获取
     ip138.token=******
     ```
-* 服务器资源
+* html页面需要修改的配置
+    ```html
+    html->js->common.js第一行修改为自己域名（一级域名）
+    var domain = "url.com";
+    ```
 * 软件环境：mysql、redis、nginx、JDK1.8
     
 
