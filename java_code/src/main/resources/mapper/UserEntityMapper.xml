@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.abner.c1n.dao.mapper.UserEntityMapper">
+  <resultMap id="BaseResultMap" type="com.abner.c1n.beans.po.UserEntity">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="pwd" jdbcType="VARCHAR" property="pwd" />
+    <result column="mail" jdbcType="VARCHAR" property="mail" />
+    <result column="token" jdbcType="VARCHAR" property="token" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, pwd, mail, token, status, update_time, create_time
+  </sql>
+  
+  <sql id="base_condition">
+      <if test="name != null and name!=''">
+        and name like concat('%',#{name,jdbcType=VARCHAR},'%')
+      </if>
+      <if test="mail != null and mail!=''">
+        and mail like concat('%',#{mail,jdbcType=VARCHAR},'%')
+      </if>
+      <if test="status != null ">
+        and status = #{status,jdbcType=VARCHAR}
+      </if>
+      <if test="startDate != null and startDate!=''">
+        and DATE_FORMAT(create_time,'%Y-%m-%d') &gt;= #{startDate,jdbcType=VARCHAR}
+      </if>
+      <if test="endDate != null and endDate!=''">
+        and DATE_FORMAT(create_time,'%Y-%m-%d') &lt;= #{endDate,jdbcType=VARCHAR}
+      </if>
+  </sql>
+  
+  <select id="queryUserByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where name = #{name,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="queryByToken" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where token = #{token,jdbcType=VARCHAR}
+  </select>
+  
+  
+  <select id="queryCountByCondition" parameterType="com.abner.c1n.beans.dto.user.UserListCondition" resultType="java.lang.Integer">
+    select count(*) 
+    from user
+    where 1=1  
+      <include refid="base_condition" />
+  </select>
+  
+  <select id="queryByCondition" parameterType="com.abner.c1n.beans.dto.user.UserListCondition" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where 1=1  
+      <include refid="base_condition" />
+      order by create_time desc limit #{offset},#{pageSize}
+  </select>
+  
+  
+  <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  
+  <delete id="deleteInitUserByTime" parameterType="java.lang.Integer">
+    delete from user
+    where status = 'INIT' AND TIMESTAMPDIFF(MINUTE,create_time,NOW()) &gt;= #{minute}
+  </delete>
+  
+  <delete id="deleteById" parameterType="java.lang.Long">
+    delete from user
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.abner.c1n.beans.po.UserEntity">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        name,
+      </if>
+      <if test="pwd != null">
+        pwd,
+      </if>
+      <if test="mail != null">
+        mail,
+      </if>
+      <if test="token != null">
+        token,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="pwd != null">
+        #{pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="mail != null">
+        #{mail,jdbcType=VARCHAR},
+      </if>
+      <if test="token != null">
+        #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateById" parameterType="com.abner.c1n.beans.po.UserEntity">
+    update user
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="pwd != null">
+        pwd = #{pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="mail != null">
+        mail = #{mail,jdbcType=VARCHAR},
+      </if>
+      <if test="token != null">
+        token = #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

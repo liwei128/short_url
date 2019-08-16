@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.abner.c1n.dao.mapper.MonitorPageEntityMapper">
+  <resultMap id="BaseResultMap" type="com.abner.c1n.beans.po.MonitorPageEntity">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  
+  <sql id="Base_Column_List">
+    id, user_id, type, url, update_time, create_time
+  </sql>
+  
+  <sql id="base_condition">
+  	  <if test="userId != null">
+        and user_id = #{userId,jdbcType=BIGINT}
+      </if>
+      <if test="url != null and url!=''">
+        and url like concat('%',#{url,jdbcType=VARCHAR},'%')
+      </if>
+      <if test="startDate != null and startDate!=''">
+        and DATE_FORMAT(create_time,'%Y-%m-%d') &gt;= #{startDate,jdbcType=VARCHAR}
+      </if>
+      <if test="endDate != null and endDate!=''">
+        and DATE_FORMAT(create_time,'%Y-%m-%d') &lt;= #{endDate,jdbcType=VARCHAR}
+      </if>
+  </sql>
+  
+  <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from monitor_page
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  
+  <select id="queryCountByCondition" parameterType="com.abner.c1n.beans.dto.monitorpage.MonitorPageCondition" resultType="java.lang.Integer">
+    select count(*) 
+    from monitor_page
+    where 1=1  
+      <include refid="base_condition" />
+  </select>
+  
+  <select id="queryByCondition" parameterType="com.abner.c1n.beans.dto.monitorpage.MonitorPageCondition" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from monitor_page
+    where 1=1  
+      <include refid="base_condition" />
+      order by create_time desc limit #{offset},#{pageSize}
+  </select>
+  
+  <delete id="deleteById" parameterType="java.lang.Long">
+    delete from monitor_page
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+
+  <insert id="insert" parameterType="com.abner.c1n.beans.po.MonitorPageEntity">
+    insert into monitor_page
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="url != null">
+        url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="updateById" parameterType="com.abner.c1n.beans.po.MonitorPageEntity">
+    update monitor_page
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+</mapper>

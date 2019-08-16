@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.abner.c1n.dao.mapper.BlacklistEntityMapper">
+  <resultMap id="BaseResultMap" type="com.abner.c1n.beans.po.BlacklistEntity">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="domain" jdbcType="VARCHAR" property="domain" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, domain, status, update_time, create_time
+  </sql>
+  
+  <sql id="base_condition">
+      <if test="domain != null and domain!='' ">
+        and domain like concat('%',#{domain,jdbcType=VARCHAR},'%')
+      </if>
+      <if test="status != null ">
+        and status = #{status,jdbcType=VARCHAR}
+      </if>
+  </sql>
+  
+  <select id="queryCountByCondition" parameterType="com.abner.c1n.beans.dto.blacklist.BlacklistCondition" resultType="java.lang.Integer">
+    select count(*) 
+    from blacklist
+    where 1=1  
+      <include refid="base_condition" />
+  </select>
+  
+  <select id="queryByCondition" parameterType="com.abner.c1n.beans.dto.blacklist.BlacklistCondition" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from blacklist
+    where 1=1  
+      <include refid="base_condition" />
+      order by create_time desc limit #{offset},#{pageSize}
+  </select>
+  
+  
+  
+  <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from blacklist
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  
+  
+  
+  <select id="queryByDomain" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from blacklist
+    where domain = #{domain,jdbcType=VARCHAR}
+  </select>
+  
+  <delete id="deleteById" parameterType="java.lang.Long">
+    delete from blacklist
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <insert id="insert" parameterType="com.abner.c1n.beans.po.BlacklistEntity">
+    insert into blacklist
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="domain != null">
+        domain,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="domain != null">
+        #{domain,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateById" parameterType="com.abner.c1n.beans.po.BlacklistEntity">
+    update blacklist
+    <set>
+      <if test="domain != null">
+        domain = #{domain,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

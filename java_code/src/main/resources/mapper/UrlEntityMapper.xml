@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.abner.c1n.dao.mapper.UrlEntityMapper">
+  <resultMap id="BaseResultMap" type="com.abner.c1n.beans.po.UrlEntity">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="keyy" jdbcType="VARCHAR" property="key" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="short_url" jdbcType="VARCHAR" property="shortUrl" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_id,keyy, type, short_url,url,status, update_time, create_time
+  </sql>
+  
+  <sql id="base_condition">
+  	  <if test="userId != null">
+        and user_id = #{userId,jdbcType=BIGINT}
+      </if>
+      <if test="status != null">
+        and status = #{status,jdbcType=VARCHAR}
+      </if>
+      <if test="keyUrl != null and keyUrl!=''">
+        and (short_url like concat('%',#{keyUrl,jdbcType=VARCHAR},'%') or url like concat('%',#{keyUrl,jdbcType=VARCHAR},'%'))
+      </if>
+      <if test="startDate != null and startDate!=''">
+        and DATE_FORMAT(create_time,'%Y-%m-%d') &gt;= #{startDate,jdbcType=VARCHAR}
+      </if>
+      <if test="endDate != null and endDate!=''">
+        and DATE_FORMAT(create_time,'%Y-%m-%d') &lt;= #{endDate,jdbcType=VARCHAR}
+      </if>
+  </sql>
+  
+  
+  <select id="queryUrlByUpdateTime" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from url
+    where TIMESTAMPDIFF(DAY,update_time,NOW()) = #{day} 
+  </select>
+  
+  <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from url
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  
+  <select id="queryByKeyAndType" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from url 
+    where keyy = #{key,jdbcType=VARCHAR} AND type = #{type,jdbcType=VARCHAR}
+  </select>
+
+  <select id="queryByUrlAndType" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from url 
+    where url = #{url,jdbcType=VARCHAR} AND type = #{type,jdbcType=VARCHAR}
+  </select>
+  
+  
+  <select id="queryCountByCondition" parameterType="com.abner.c1n.beans.dto.shorturl.ShortLinkCondition" resultType="java.lang.Integer">
+    select count(*) 
+    from url
+    where 1=1
+      <include refid="base_condition" />
+  </select>
+  
+  <select id="queryByCondition" parameterType="com.abner.c1n.beans.dto.shorturl.ShortLinkCondition" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from url
+    where 1=1 
+      <include refid="base_condition" />
+      order by create_time desc limit #{offset},#{pageSize}
+  </select>
+  
+  
+  
+  <delete id="deleteById" parameterType="java.lang.Long">
+    delete from url
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.abner.c1n.beans.po.UrlEntity">
+    insert into url
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="key != null">
+        keyy,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="shortUrl != null">
+        short_url,
+      </if>
+      <if test="url != null">
+        url,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="key != null">
+        #{key,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="shortUrl != null">
+        #{shortUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateById" parameterType="com.abner.c1n.beans.po.UrlEntity">
+    update url
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="key != null">
+        keyy = #{key,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="shortUrl != null">
+        short_url = #{shortUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

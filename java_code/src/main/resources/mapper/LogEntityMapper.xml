@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.abner.c1n.dao.mapper.LogEntityMapper">
+  <resultMap id="BaseResultMap" type="com.abner.c1n.beans.po.LogEntity">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="ip" jdbcType="VARCHAR" property="ip" />
+    <result column="domain_tag" jdbcType="VARCHAR" property="domainTag" />
+    <result column="cookies" jdbcType="VARCHAR" property="cookies" />
+    <result column="device" jdbcType="VARCHAR" property="device" />
+    <result column="browser" jdbcType="VARCHAR" property="browser" />
+    <result column="country" jdbcType="VARCHAR" property="country" />
+    <result column="province" jdbcType="VARCHAR" property="province" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="network_operator" jdbcType="VARCHAR" property="networkOperator" />
+    <result column="source" jdbcType="VARCHAR" property="source" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  
+  <sql id="Base_Column_List">
+    id, url, ip,domain_tag,cookies, device, browser, country, province, city, network_operator, source, 
+    status, update_time, create_time
+  </sql>
+  
+  <sql id="base_condition">
+      <if test="domain != null and domain!=''">
+        and domain_tag = #{domain,jdbcType=VARCHAR}
+      </if>
+      <if test="url != null and url!=''">
+        and url = #{url,jdbcType=VARCHAR}
+      </if>
+      <if test="startDate != null and startDate!=''">
+        and DATE_FORMAT(create_time,'%Y-%m-%d') &gt;= #{startDate,jdbcType=VARCHAR}
+      </if>
+      <if test="endDate != null and endDate!=''">
+        and DATE_FORMAT(create_time,'%Y-%m-%d') &lt;= #{endDate,jdbcType=VARCHAR}
+      </if>
+  </sql>
+  
+  <select id="queryVisits" parameterType="com.abner.c1n.beans.dto.logs.LogCondition" resultType="com.abner.c1n.beans.vo.url.Pv">
+    select COUNT(*) AS 'pv',COUNT(DISTINCT(ip)) AS 'ipCount', COUNT(DISTINCT(cookies)) AS 'userCount'
+    from log
+    where 1=1
+    <include refid="base_condition" />
+  </select>
+
+  <select id="queryCountByUrl" parameterType="java.lang.String" resultType="java.lang.Integer">
+    select COUNT(*)
+    from log
+    where url = #{shortUrl}
+  </select>
+  
+  <delete id="deleteByUrl" parameterType="java.lang.String">
+    delete from log
+    where url = #{shortUrl}
+  </delete>
+  
+  
+ 
+  
+  <select id="queryEverydayPv" parameterType="com.abner.c1n.beans.dto.logs.LogCondition" resultType="com.abner.c1n.beans.vo.url.PvByDate">
+    select DATE_FORMAT(create_time,'%Y-%m-%d') AS 'logDate',COUNT(*) AS 'pv',COUNT(DISTINCT(ip)) AS 'ipCount', COUNT(DISTINCT(cookies)) AS 'userCount'
+    from log
+    where 1=1
+	<include refid="base_condition" />
+    GROUP BY logDate
+  </select>
+  
+  <select id="everyhourPv" parameterType="com.abner.c1n.beans.dto.logs.LogCondition" resultType="com.abner.c1n.beans.vo.url.PvByDate">
+    select DATE_FORMAT(create_time,'%Y-%m-%d %H') AS 'logDate',COUNT(*) AS 'pv',COUNT(DISTINCT(ip)) AS 'ipCount', COUNT(DISTINCT(cookies)) AS 'userCount'
+    from log
+    where 1=1
+      <if test="domain != null and domain!=''">
+        and domain_tag = #{domain,jdbcType=VARCHAR}
+      </if>
+      <if test="url != null and url!=''">
+        and url = #{url,jdbcType=VARCHAR}
+      </if>
+      <if test="startDate != null and startDate!=''">
+        and DATE_FORMAT(create_time,'%Y-%m-%d %H') &gt;= #{startDate,jdbcType=VARCHAR}
+      </if>
+      <if test="endDate != null and endDate!=''">
+        and DATE_FORMAT(create_time,'%Y-%m-%d %H') &lt;= #{endDate,jdbcType=VARCHAR}
+      </if>
+    GROUP BY logDate
+  </select>
+
+  
+  <select id="queryPvByAttribute" parameterType="com.abner.c1n.beans.dto.logs.AttributeLogCondition" resultType="com.abner.c1n.beans.vo.url.PvByAttribute">
+    select ${name} AS 'name',COUNT(*) AS 'pv'
+    from log
+    where 1=1
+	<include refid="base_condition" />
+	<if test="condition != null ">
+        and ${condition} 
+    </if>
+    GROUP BY ${name} order by pv desc
+  </select>
+  
+  <select id="queryCountByCondition" parameterType="com.abner.c1n.beans.dto.logs.LogCondition" resultType="java.lang.Integer">
+    select count(*) 
+    from log
+    where 1=1  
+      <include refid="base_condition" />
+  </select>
+  
+  <select id="queryByCondition" parameterType="com.abner.c1n.beans.dto.logs.LogCondition" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from log
+    where 1=1  
+      <include refid="base_condition" />
+      order by create_time desc limit #{offset},#{pageSize}
+  </select>
+  
+  <select id="oftenIp" parameterType="com.abner.c1n.beans.dto.logs.LogCondition" resultType="map">
+    select ip,count(*) AS pv,country,province,city,network_operator AS network
+    from log
+    where 1=1  
+      <include refid="base_condition" />
+      group by ip order by pv desc limit 0,30
+  </select>
+  
+  
+  <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from log
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  
+  <delete id="deleteById" parameterType="java.lang.Long">
+    delete from log
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <insert id="insert" parameterType="com.abner.c1n.beans.po.LogEntity">
+    insert into log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="url != null">
+        url,
+      </if>
+      <if test="ip != null">
+        ip,
+      </if>
+      <if test="domainTag != null">
+        domain_tag,
+      </if>
+      <if test="cookies != null">
+        cookies,
+      </if>
+      <if test="device != null">
+        device,
+      </if>
+      <if test="browser != null">
+        browser,
+      </if>
+      <if test="country != null">
+        country,
+      </if>
+      <if test="province != null">
+        province,
+      </if>
+      <if test="city != null">
+        city,
+      </if>
+      <if test="networkOperator != null">
+        network_operator,
+      </if>
+      <if test="source != null">
+        source,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null">
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="domainTag != null">
+        #{domainTag,jdbcType=VARCHAR},
+      </if>
+      <if test="cookies != null">
+        #{cookies,jdbcType=VARCHAR},
+      </if>
+      <if test="device != null">
+        #{device,jdbcType=VARCHAR},
+      </if>
+      <if test="browser != null">
+        #{browser,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null">
+        #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null">
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="networkOperator != null">
+        #{networkOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null">
+        #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateById" parameterType="com.abner.c1n.beans.po.LogEntity">
+    update log
+    <set>
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null">
+        ip = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="domainTag != null">
+        domain_tag = #{domainTag,jdbcType=VARCHAR},
+      </if>
+      <if test="cookies != null">
+        cookies = #{cookies,jdbcType=VARCHAR},
+      </if>
+      <if test="device != null">
+        device = #{device,jdbcType=VARCHAR},
+      </if>
+      <if test="browser != null">
+        browser = #{browser,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null">
+        country = #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null">
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="networkOperator != null">
+        network_operator = #{networkOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null">
+        source = #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+ 
+</mapper>
