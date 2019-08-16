@@ -1,0 +1,83 @@
+@import "common.less";
+body {
+    background-color: rgba(64,158,255,0.1);
+    padding: 20px;
+    .board {
+        max-width: 350px;
+        margin: 0 auto;
+        margin-top: 20vh;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 4px;
+        box-shadow: 0px 0px 5px 5px rgba(64,158,255,0.1);
+        .title {
+            text-align: center;
+            margin: 20px 0 30px 0;
+            img {
+                height: 100px;
+                border-radius: 50%;
+                border: 4px solid #eee;
+            }
+            .webName {
+                color: #999;
+            }
+            .picTitle {
+                font-size: 28px;
+                font-weight: bold;
+            }
+        }
+        .form {
+            input,button,.code {
+                width: 100%;
+                height: 40px;
+                margin-bottom: 10px;
+            }
+            input {
+                border-color: #ddd;
+                &:focus{
+                    border-color: @mainColor;
+                }
+            }
+            .code {
+                input {
+                    float: left;
+                    width: 48%;
+                }
+                button {
+                    float: right;
+                    width: 48%;
+                    padding: 0;
+                    background-color: #ccc;
+                    font-size: 16px;
+                }
+                .active {
+                    background-color: rgba(56, 133, 209, 0.7);
+                    &:hover {
+                        background-color: rgba(56, 133, 209, 0.9); 
+                    }
+                }
+            }
+            >button {
+                margin-top: 20px;
+                margin-bottom: 0;
+            }
+        }
+        .other {
+            font-size: 16px;
+            margin-top: 20px;
+            color: #999;
+            text-align: center;
+            span {
+                cursor: pointer;
+                margin-right: 10px;
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+        @media screen and (max-width: 768px) { 
+            margin-top: 5vh;
+        }
+        
+    }
+}

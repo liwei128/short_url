@@ -1,0 +1,412 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  height: 100%;
+}
+html body {
+  min-height: 100%;
+  font-size: 18px;
+  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "微软雅黑", "Hiragino Sans GB", "Microsoft YaHei", Arial, sans-serif;
+  color: #666;
+  padding: 62px 10px 30px 10px;
+  position: relative;
+}
+@media screen and (max-width: 768px) {
+  html body {
+    padding: 52px 10px 50px 10px;
+  }
+}
+a,
+input,
+button {
+  outline: none;
+  border: none;
+  text-decoration: none;
+}
+i {
+  font-style: normal;
+}
+a {
+  color: #333;
+}
+a:hover {
+  color: #409eff;
+}
+.clearfix:after {
+  content: "";
+  height: 0;
+  line-height: 0;
+  display: block;
+  visibility: hidden;
+  clear: both;
+}
+.clearfix {
+  zoom: 1;
+}
+input {
+  height: 50px;
+  padding: 0 10px;
+  font-size: 18px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  background-color: transparent;
+}
+input:focus {
+  border-color: #409eff;
+}
+input::-webkit-input-placeholder {
+  color: #aab2bd;
+  font-size: 16px;
+}
+@media screen and (max-width: 768px) {
+  input {
+    height: 40px;
+  }
+}
+select {
+  height: 30px;
+  padding: 0 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  background-color: #fff;
+}
+button {
+  background-color: #409eff;
+  color: #fff;
+  height: 50px;
+  padding: 0 30px;
+  font-size: 18px;
+  letter-spacing: 2px;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+button:hover {
+  background-color: rgba(64, 158, 255, 0.8);
+}
+@media screen and (max-width: 768px) {
+  button {
+    height: 40px;
+  }
+}
+.v-radio {
+  width: 40px;
+  height: 20px;
+  border-radius: 10px;
+  background-color: #999;
+  cursor: pointer;
+}
+.v-radio div {
+  float: left;
+  transform: translateX(0px);
+  transition: transform 0.3s;
+  -moz-transition: -moz-transform 0.3s;
+  -webkit-transition: -webkit-transform 0.3s;
+  -o-transition: -o-transform 0.3s;
+  width: 20px;
+  height: 20px;
+  box-shadow: 0px 0px 2px #333;
+  border-radius: 50%;
+  background-color: #fff;
+}
+.v-radio.v-active {
+  background-color: #fff;
+}
+.v-radio.v-active div {
+  transform: translateX(20px);
+  transition: transform 0.3s;
+  -moz-transition: -moz-transform 0.3s;
+  -webkit-transition: -webkit-transform 0.3s;
+  -o-transition: -o-transform 0.3s;
+  background-color: #409eff;
+}
+#block {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.75);
+  z-index: -1;
+}
+.topBar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 15px 60px;
+  box-sizing: border-box;
+  font-size: 16px;
+  line-height: 30px;
+  color: #bbb;
+}
+.topBar #logo {
+  float: left;
+  height: 30px;
+}
+.topBar .radio {
+  float: right;
+  margin-top: 20px;
+  margin-right: 20px;
+}
+.topBar .radio i {
+  float: left;
+  font-size: 16px;
+  color: #fff;
+}
+.topBar .radio .btn1 {
+  float: left;
+}
+.topBar .nav {
+  float: right;
+}
+.topBar .nav span {
+  float: left;
+  cursor: pointer;
+  margin-left: 10px;
+}
+.topBar .nav span:hover {
+  color: #fff;
+}
+.topBar .nav .active {
+  color: #fff;
+}
+.topBar .info {
+  float: right;
+  margin-left: 20px;
+  cursor: pointer;
+}
+.topBar .info .login {
+  float: left;
+  padding: 0 10px;
+  border: 1px solid #bbb;
+  border-radius: 4px;
+}
+.topBar .info .login i:hover {
+  color: #fff;
+}
+.topBar .info .peoplePic {
+  float: left;
+  height: 24px;
+  vertical-align: middle;
+}
+.topBar .info .peopleName {
+  float: left;
+  max-width: 4em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.topBar .info .peopleName:hover {
+  color: #fff;
+}
+.topBar .afterLogin {
+  position: relative;
+}
+.topBar .afterLogin .downInfo {
+  position: absolute;
+  left: 0;
+  width: 90px;
+  border: 1px solid rgba(187, 187, 187, 0.2);
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 10px;
+}
+.topBar .afterLogin .downInfo > div:hover {
+  color: #fff;
+}
+@media screen and (max-width: 768px) {
+  .topBar {
+    padding: 10px;
+    font-size: 14px;
+  }
+  .topBar #logo {
+    height: 20px;
+  }
+  .topBar .info .peoplePic {
+    height: 20px;
+  }
+}
+.provider {
+  position: absolute;
+  bottom: 5px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 18px;
+  color: rgba(204, 204, 204, 0.8);
+  z-index: 1 !important;
+}
+.provider #email {
+  color: rgba(204, 204, 204, 0.8);
+  cursor: pointer;
+}
+.provider #email:hover {
+  color: #409eff;
+}
+@media screen and (max-width: 768px) {
+  .provider {
+    font-size: 14px;
+  }
+}
+.notePop {
+  position: fixed;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 300px;
+  max-width: 800px;
+  padding: 0 40px 0 20px;
+  background-color: rgba(103, 194, 58, 0.8);
+  color: #fff;
+  z-index: 1001;
+}
+.notePop b {
+  line-height: 40px;
+}
+.notePop i {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  background-color: rgba(0, 0, 0, 0.4);
+  color: #fff;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
+  border-radius: 50%;
+  font-size: 14px;
+  cursor: pointer;
+}
+.notePop.err {
+  background-color: rgba(245, 108, 108, 0.8);
+}
+body {
+  background: url("../img/bg.jpg") no-repeat center fixed;
+  background-size: cover;
+}
+body .title {
+  color: #fff;
+  font-size: 50px;
+  text-align: center;
+  padding-top: 8vh;
+  line-height: 25vh;
+  letter-spacing: 2px;
+}
+@media screen and (max-width: 768px) {
+  body .title {
+    font-size: 30px;
+    padding-top: 0vh;
+    line-height: 18vh;
+  }
+}
+body .main {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0;
+  z-index: 1000;
+  position: relative;
+}
+body .main .btns .switchBtn {
+  background-color: rgba(64, 158, 255, 0.8);
+}
+body .main .btns .switchBtn:hover {
+  background-color: #409eff;
+}
+body .main .btns .switchBtn:first-child {
+  border-radius: 4px 0 0 0;
+}
+body .main .btns .switchBtn:last-child {
+  border-radius: 0 4px 0 0;
+}
+body .main .btns .active {
+  background-color: #fff;
+  color: #409eff;
+  font-weight: bold;
+}
+body .main .btns .active:hover {
+  background-color: #fff;
+}
+body .main .opate {
+  background-color: #fff;
+  padding: 50px;
+  border-radius: 0 4px 4px 4px;
+}
+body .main .opate .short {
+  display: none;
+}
+body .main .opate .short .site {
+  width: 80%;
+}
+body .main .opate .short > button {
+  width: 20%;
+  vertical-align: top;
+}
+body .main .opate .short .define {
+  margin-bottom: 10px;
+}
+body .main .opate .short .define .keyWords {
+  height: 30px;
+  width: 140px;
+}
+body .main .opate .short .define .keyWords::-webkit-input-placeholder {
+  font-size: 14px;
+}
+body .main .opate .short .define i {
+  color: #aaa;
+}
+body .main .opate .short .define select {
+  margin-right: 20px;
+}
+body .main .opate .short .result {
+  margin-top: 10px;
+  line-height: 22px;
+  word-break: break-all;
+}
+body .main .opate .short .result .copyIcon {
+  font-size: 16px;
+  color: #fff;
+  background-color: rgba(64, 158, 255, 0.8);
+  margin-left: 10px;
+  padding: 2px;
+  cursor: pointer;
+}
+body .main .opate .short .err {
+  color: rgba(245, 108, 108, 0.8);
+}
+body .main .opate .short .friendNote {
+  margin-top: 30px;
+  font-size: 14px;
+  color: #ccc;
+}
+body .main .opate .active {
+  display: block;
+}
+@media screen and (max-width: 768px) {
+  body .main {
+    max-width: 100%;
+  }
+  body .main .btns .switchBtn:first-child {
+    width: 40%;
+  }
+  body .main .btns .switchBtn:last-child {
+    width: 60%;
+  }
+  body .main .opate {
+    padding: 30px 40px;
+    border-radius: 0 0 4px 4px;
+  }
+  body .main .opate .short .site {
+    width: 100%;
+  }
+  body .main .opate .short button {
+    width: 100%;
+    margin-top: 10px;
+  }
+  body .main .opate .short .define span {
+    display: block;
+    margin-top: 10px;
+    padding: 0;
+  }
+}

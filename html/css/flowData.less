@@ -1,0 +1,263 @@
+@import "./common.less";
+body {
+    // background: url("../img/icon.png") no-repeat center fixed;
+    // background-size: cover;
+    // padding-left: 0 !important;
+    // padding-right: 0 !important;
+    .topBar {
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+    .main {
+        max-width: 1366px;
+        margin: 0 auto;
+        margin-top: 20px;
+        padding: 10px 20px;
+        color: #fff;
+        background-color: rgba(255, 255, 255, 0.05);
+        transition: max-width 0.3s;
+        -moz-transition: max-width 0.3s;
+        -webkit-transition: max-width 0.3s;
+        -o-transition: max-width 0.3s;
+        >.name {
+            font-size: 20px;
+            line-height: 60px;
+        }
+        // 总数据统计
+        .totalData {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            >div {
+                position: relative;
+                width: 24%;
+                min-width: 240px;
+                height: 100px;
+                background-color: @mainColor1;
+                // line-height: 100px;
+                font-size: 26px;
+                border-radius: 4px;
+                padding: 10px 10px 10px 90px;
+                i {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 80px;
+                    height: 100%;
+                    background-color: #ccc;
+                    border-radius: 4px 0 0 4px;
+                    img {
+                        float: left;
+                        width: 50%;
+                        margin-left: 25%;
+                        margin-top: 50%;
+                        transform: translateY(-50%)
+                    }
+                }
+                div {
+                    width: 100%;
+                    max-height: 100%;
+                    height: 50%;
+                    line-height: 40px;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                }
+                .site {
+                    font-size: 16px;
+                    a {
+                        color: #fff;
+                    }
+                }
+                .title {
+                    font-size: 16px;
+                    color: #bbb;
+                }
+            }
+        }
+        // 30天内的访问统计
+        .model {
+            position: relative;
+            background-color: @mainColor1;
+            border-radius: 4px;
+            padding: 20px;
+            margin-top: 20px;
+            .modelTop {
+                .name {
+                    float: left;
+                    font-size: 18px;
+                    line-height: 32px;
+                }
+                .timepick {
+                    position: relative;
+                    float: right;
+                    width: 300px;
+                    background: #fff;
+                    .selectTime {
+                        position: absolute;
+                        left: 0;
+                        width: 100%;
+                        height: 32px;
+                        padding-left: 36px;
+                        border: none;
+                        color: #666;
+                        border-radius: 2px;
+                    }
+                    img {
+                        position: absolute;
+                        left: 4px;
+                        top: 4px;
+                        width: 24px;
+                    }
+                }
+            }
+            .dataView {
+                margin-top: 10px;
+                >div {
+                    float: left;
+                    height: 100%;
+                    width: 100%;
+                }
+                .chart {
+                    height: 540px;
+                }
+                .p30 {
+                    width: 30%;
+                }   
+                .p40 {
+                    width: 40%;
+                }
+                .p50 {
+                    width: 50%;
+                }
+                .p60 {
+                    width: 60%;
+                }
+                .p70 {
+                    width: 70%;
+                }
+                .leftSelect {
+                    padding: 10px;
+                    .btnBar {
+                        span {
+                            float: left;
+                            width: 25%;
+                            line-height: 22px;
+                            padding: 8px 4px;
+                            text-align: center;
+                            border: 1px solid rgba(255, 255, 255, 0.1);
+                            cursor: pointer;
+                        }
+                        span.active {
+                            box-shadow: 0 0  5px rgba(255, 255, 255, 0.5);
+                            background-color: rgba(255, 255, 255, 0.05)
+                        }
+                    }
+                    .datas {
+                        text-align: center;
+                        >div{
+                            margin-top: 60px;
+                            .unm{
+                                font-size: 34px;
+                                margin-bottom: 10px;
+                            }
+                            .title {
+                                font-size: 14px;
+                            }
+                        }
+                    }
+                }
+
+                .table {
+                    margin-top: 10px;
+                    min-height: 200px;
+                    overflow: auto;
+                    table {
+                        width: 100%;
+                        thead {
+                            text-align: left;
+                        }
+                        tbody {
+                            color: #ccc;
+                            font-size: 14px;
+                            tr {
+                                height: 38px;
+                                border-bottom: 1px solid rgba(0,0,0,0.1);
+                                &:nth-child(2n){
+                                    background-color: rgba(0, 0, 0, 0.08)
+                                }
+                                &:hover {
+                                    background-color: rgba(0, 0, 0, 0.12)
+                                }
+                            }
+                            tr.FAIL {
+                                background-color: 	rgba(230,162,60,0.2);
+                                .refuse {
+                                    background-color: #E6A23C;
+                                    padding: 2px 4px;
+                                    border-radius: 2px;
+                                    color: #fff;
+                                }
+                            }
+                        }
+                    }
+                }
+                // 页码
+                .pageBar {
+                    margin-top: 20px !important;
+                    .totalPage {
+                        line-height: 35px;
+                        margin-right: 20px;
+                        float: right;
+                    }
+                    .page {
+                        margin: 0 auto;
+                        float: right;
+                    }
+                }
+            }
+            .noData {
+                display: none;
+                text-align: center;
+                color: #ccc;
+                height: 200px;
+                line-height: 200px;
+            }
+        }
+    }
+    @media screen and (max-width: 768px) { 
+        .main {
+            padding: 0;
+            margin-top: 0;
+            background-color: transparent;
+            .totalData {
+                >div {
+                    width:100%;
+                    margin-bottom: 10px;
+                }
+            }
+            .model {
+                padding: 10px;
+                .modelTop {
+                    height: 64px;
+                    .timepick {
+                        width: 100%;
+                    }
+                }
+                .dataView {
+                    >div {
+                        width: 100% !important;
+                    }
+                    .leftSelect {
+                        .datas {
+                            >div {
+                                float: left;
+                                width: 33%;
+                                margin: 40px 0;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

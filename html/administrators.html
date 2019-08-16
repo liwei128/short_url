@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="description" content="C1N短网址服务平台，随心所欲定制域名，定制网址。c1n.cn为您提供专业、稳定、安全、快速、便捷的短网址服务。轻松帮助您把冗长网址缩短为10个字符以内的短网址,方便您分享和使用。" />
+	<meta name="keywords" content="C1N短网址服务平台" />
+    <title>C1N短网址服务平台</title>
+    <link rel="shortcut icon" href="./img/logo1.png">
+    <link rel="stylesheet" href="./plug/jqueryPagination/jquery.pagination.css" />
+    <link rel="stylesheet" href="./plug/jeDate/skin/jedate.css"/>
+    <link rel="stylesheet" type="text/css" href="css/administrators.css">
+</head>
+<body>
+    <!-- <div id="block"></div> -->
+    <!-- nav -->
+    <div class="topBar clearfix" style="background-color:rgba(0, 0, 0, 0.8)">
+        <img src="./img/logo1.png" alt="" id="logo" onclick="window.location.href='./home.html'">
+        <div class="info beforLogin clearfix" hidden>
+            <span class="login"><i onclick="window.open('./login.html')">登录</i> | <i onclick="window.open('./register.html')">注册</i></span>
+        </div>
+        <div class="info afterLogin clearfix" hidden>
+            <img src="./img/people3.png" alt="" class="peoplePic">
+            <i class="peopleName"></i><img src="./img/down.png" alt="">
+            <div class="downInfo" hidden>
+                <div onclick="window.location.href='./changePassword.html'">修改密码</div>
+                <div class="loginOut">退出</div>
+            </div>
+        </div>
+        <div class="nav clearfix">
+            <span onclick="window.location.href='./home.html'">短网址</span>
+			<span onclick="window.location.href='./files/c1n短网址平台接口文档.docx'">接口文档</span>
+            <span class="active" onclick="window.location.href='./administrators.html'">用户中心</span>
+        </div>
+    </div>
+    <div class="main clearfix">
+        <div class="leftLab clearfix">
+            <span class="shortManage active"><i>短网址管理</i></span>
+            <span class="monitor"><i>监控页面</i></span>
+            <span class="userManage"><i>用户管理</i></span>
+			<span class="blacklistManage"><i>黑名单</i></span>
+            <span class="token"><i>token管理</i></span>
+        </div>
+        <div class="right v-scrollbar">
+            <!-- 短网址管理 -->
+            <div class="tableBox shortManage" >
+                <div class="searchBar">
+                    <input type="text" class="keyUrl" placeholder="短网址/原网址">
+                    <input id="shortTime" class="time" type="text" placeholder="请选择时间范围" readonly>
+                    <button class="searchBtn">搜索</button>
+                    <button class="resetBtn">重置</button>
+                </div>
+                <div class="table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="shotSite" style="min-width: 180px;">短网址</th>
+                                <th class="longSite" style="min-width: 240px;">原网址</th>
+                                <th class="time" style="min-width: 180px;">生成时间</th>
+                                <th class="status" style="min-width: 100px;">
+                                    <select  placeholder="状态">
+                                        <option value="" >状态</option>
+                                        <option value="NORMAL">启用</option>
+                                        <option value="DISABLED">禁用</option>
+                                    </select>
+                                </th>
+                                <th class="toChart" style="min-width: 100px;">流量分析</th>
+                                <th class="opera" style="min-width: 180px;width: 180px;">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="pageBar clearfix">
+                    <div id="shortPage" class="page fl"></div>
+                    <i class="totalPage">共 <span>1</span> 条</i>
+                </div>
+            </div>
+            <!-- 监控页面 -->
+            <div class="tableBox monitor" hidden>
+                <div class="imTips">
+                    想监控网站/网页实时访问量？两步轻松搞定<br/>
+                    1：在html页面中引入一行js
+                    <!-- <script type="text/javascript" src="js/checkUrl.js"></script> -->
+                    <div class="code">
+                        <code><</code>
+                        <code>script type="text/javascript" src="http://www.url.com/js/checkUrl.js"</code>
+                        <code>></code><code><</code><code>/script</code><code>></code>
+                    </div>
+                    2：将html页面地址添加到下面的列表中。即可查看访问数据。
+                </div>
+                <div class="searchBar clearfix">
+                    <input type="text" class="url" placeholder="网址/域名">
+                    <input id="monitoTime" class="time" type="text" placeholder="请选择时间范围" readonly>
+                    <button class="searchBtn">搜索</button>
+                    <button class="resetBtn">重置</button>
+                    <button class="addBtn">新增</button>
+                </div>
+                <div class="table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="min-width: 100px;">类型</th>
+                                <th style="min-width: 300px;">网址/域名</th>
+                                <th style="min-width: 180px;">添加时间</th>
+                                <th class="toChart" style="min-width: 100px;">流量分析</th>
+                                <th style="min-width: 100px;width: 100px">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                        </tbody>
+                    </table>
+                </div>
+                <div class="pageBar clearfix">
+                    <div id="monitorPage" class="page fl"></div>
+                    <i class="totalPage">共 <span>1</span> 条</i>
+                </div>
+            </div>
+            <!-- 用户管理 -->
+            <div class="tableBox userManage" hidden>
+                <div class="searchBar clearfix">
+                    <input type="text" class="name" placeholder="请输入用户名">
+                    <input type="text" class="mail" placeholder="请输入邮箱">
+                    <input id="userTime" class="time" type="text" placeholder="请选择时间范围" readonly>
+                    <button class="searchBtn">搜索</button>
+                    <button class="resetBtn">重置</button>
+                </div>
+                <div class="table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="min-width: 80px;">id</th>
+                                <th style="min-width: 100px;">用户名</th>
+                                <th style="min-width: 240px;">邮箱</th>
+                                <th style="min-width: 180px;">创建时间</th>
+                                <th class="status" style="min-width: 100px;">
+                                    <select  placeholder="状态">
+                                        <!-- <option value="" disabled="true" selected class="disabled">请选择短网址状态</option> -->
+                                        <option value="" >状态</option>
+                                        <option value="INIT">未激活</option>
+                                        <option value="NORMAL">启用</option>
+                                        <option value="DISABLED">禁用</option>
+                                    </select>
+                                </th>
+                                <th style="min-width: 100px;width: 100px;">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                        </tbody>
+                    </table>
+                </div>
+                <div class="pageBar clearfix">
+                    <div id="userPage" class="page fl"></div>
+                    <i class="totalPage">共 <span>1</span> 条</i>
+                </div>
+            </div>
+			<!-- 黑名单 -->
+			<div class="tableBox blacklistManage" hidden>
+			    <div class="searchBar clearfix">
+			        <input type="text" class="name" placeholder="请输入域名">
+			        <button class="searchBtn">搜索</button>
+			        <button class="resetBtn">重置</button>
+			    </div>
+			    <div class="table">
+			        <table>
+			            <thead>
+			                <tr>
+			                    <th style="min-width: 80px;">id</th>
+			                    <th style="min-width: 250px;">黑名单域名</th>
+			                    <th style="min-width: 150px;">创建时间</th>
+			                    <th class="status" style="min-width: 150px;">
+			                        <select  placeholder="状态">
+			                            <option value="" >状态</option>
+			                            <option value="NORMAL">启用</option>
+			                            <option value="DISABLED">禁用</option>
+			                        </select>
+			                    </th>
+			                    <th style="min-width: 150px;width: 150px;">操作</th>
+			                </tr>
+			            </thead>
+			            <tbody>
+			                
+			            </tbody>
+			        </table>
+			    </div>
+			    <div class="pageBar clearfix">
+			        <div id="blacklistPage" class="page fl"></div>
+			        <i class="totalPage">共 <span>1</span> 条</i>
+			    </div>
+			</div>
+            <!-- token管理 -->
+            <div class="tableBox token" hidden>
+                <div class="currentToken">
+                    <i>token：</i><b>B3669881BE92BFDB9AE91318F1595C48</b>
+                    <button class="updateBtn">刷新</button>
+                    <div class="selfInfo">
+                        <div class="name">用户名：<span>追风少年</span></div>
+                        <div class="mail">邮箱：<span>wwwwww</span></div>
+                        <div class="time">注册时间：<span>eeeee</span></div>
+                    </div>
+                </div>
+                <div class="note">温馨提示：token用于使用API接口自动生成短网址，详情见接口文档。
+                </div>
+                <span class="downLoad" onclick="window.location.href='./files/c1n短网址平台接口文档.docx'">下载接口文档</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 备案号 -->
+    <!-- <div class="provider">©2019 c1n | 粤ICP备18037676号 | 联系我们:<a href="mailto:c1n_dwz@aliyun.com" id="email">c1n_dwz@aliyun.com</a></div> -->
+    <!-- 弹窗 -->
+    <div class="notePop err" hidden><b></b><i>x</i></div>
+
+    <!-- 确定框 -->
+    <div class="w_confirmPop deletPop" hidden></div>
+    
+    <!-- 操作弹框 修改短网址-->
+    <div class="w_confirmPop editShortUrlPop" hidden>
+        <div class="editShortUrl">
+            <!-- <b>短网址：</b><i>http://c1n.cn/</i><input type="text" value="123"> -->
+        </div>
+        <div class="editLongUrl">
+            <b>原网址：</b><textarea  cols="30" rows="4"></textarea>
+        </div>
+    </div>
+
+    <!-- 操作弹框 新增监控网址-->
+    <div class="w_confirmPop addUrlPop" hidden>
+        <div class="radio">
+            <input type="radio" id="URI" name="urlTypeSelect" value="URL" checked>
+            <label for="URI">网址</label>
+            <input type="radio" id="DOMAIN" name="urlTypeSelect" value="DOMAIN">
+            <label for="DOMAIN">域名</label>
+        </div>
+        <div class="longUrl">
+            <b>链接：</b><textarea  cols="30" rows="4"></textarea>
+        </div>
+    </div>
+    
+
+
+
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/checkUrl.js"></script>
+    <script type="text/javascript" src="./plug/jqueryPagination/jquery.pagination.min.js"></script>
+    <script type="text/javascript" src="./plug/jeDate/src/jedate.js"></script>
+    <script type="text/javascript" src="js/common.js" ></script>
+    <script type="text/javascript" src="js/administrators.js" ></script>
+</body>
+</html>

@@ -1,0 +1,143 @@
+@import "common.less";
+body {
+    background: url("../img/bg.jpg") no-repeat center fixed;
+    background-size: cover;
+    
+    // title
+    .title {
+        color: #fff;
+        font-size: 50px;
+        text-align: center;
+        padding-top: 8vh;
+        line-height: 25vh;
+        // font-weight: bold;
+        letter-spacing: 2px;
+        @media screen and (max-width: 768px) { 
+            font-size: 30px;
+            padding-top: 0vh;
+            line-height: 18vh;
+        }
+    }
+
+    // 内容
+    .main {
+        max-width: 800px;
+        margin: 0 auto;  
+        padding: 0; 
+        z-index: 1000;
+        position: relative;
+        .btns {
+            .switchBtn {
+                background-color: @mainColor8;
+                &:hover{
+                    background-color: @mainColor;
+                }
+                &:first-child{
+                    border-radius: 4px 0 0 0;
+                }
+                &:last-child{
+                    border-radius: 0 4px 0 0;
+                }
+            }
+            .active {
+                background-color: #fff;
+                color: @mainColor;
+                font-weight: bold;
+                &:hover{
+                    background-color: #fff;
+                }
+            }
+        }
+        .opate {
+            background-color: #fff;
+            padding: 50px;
+            border-radius: 0 4px 4px 4px;
+            .short {
+                display: none;
+                .site {
+                    width: 80%;
+                }
+                >button {
+                    width: 20%;
+                    vertical-align: top;
+                }
+                .define {
+                    margin-bottom: 10px;
+                    .keyWords {
+                        height: 30px;
+                        width: 140px;
+                        &::-webkit-input-placeholder {
+                            font-size: 14px;
+                        }
+                    }
+                    i {
+                        color: #aaa;
+                    }
+                    select {
+                        margin-right: 20px;
+                    }
+                }
+                .result {
+                    margin-top: 10px;
+                    line-height: 22px;
+                    word-break: break-all;
+                    .copyIcon {
+                        font-size: 16px;
+                        color: #fff;
+                        background-color: @mainColor8;
+                        margin-left: 10px;
+                        padding: 2px;
+                        cursor: pointer;
+                    }
+                }
+                .err {
+                    color: @err;
+                }
+                .friendNote {
+                    margin-top: 30px;
+                    // background-color: #eee;
+                    font-size: 14px;
+                    color: #ccc;
+                }
+            }
+            .active {
+                display: block;
+            }
+        }
+        @media screen and (max-width: 768px) { 
+            max-width: 100%;
+            .btns {
+                .switchBtn {
+                    &:first-child {
+                        width: 40%;
+                    }
+                    &:last-child {
+                        width: 60%;
+                    }
+                }
+            }
+            .opate {
+                padding: 30px 40px;
+                border-radius: 0 0 4px 4px;
+                .short {
+                    .site {
+                        width: 100%;
+                    }
+                    button {
+                        width: 100%;
+                        margin-top: 10px;
+                    }
+                    .define {
+                        span {
+                            display: block;
+                            margin-top: 10px;
+                            padding: 0;
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+
+}

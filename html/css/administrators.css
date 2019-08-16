@@ -1,0 +1,697 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  height: 100%;
+}
+html body {
+  min-height: 100%;
+  font-size: 16px;
+  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "微软雅黑", "Hiragino Sans GB", "Microsoft YaHei", Arial, sans-serif;
+  color: #666;
+  padding: 60px 10px 30px 10px;
+  position: relative;
+}
+@media screen and (max-width: 768px) {
+  html body {
+    padding: 52px 10px 50px 10px;
+  }
+}
+a,
+input,
+button {
+  outline: none;
+  border: none;
+  text-decoration: none;
+}
+i {
+  font-style: normal;
+}
+a {
+  color: #333;
+}
+a:hover {
+  color: #409eff;
+}
+.clearfix:after {
+  content: "";
+  height: 0;
+  line-height: 0;
+  display: block;
+  visibility: hidden;
+  clear: both;
+}
+.clearfix {
+  zoom: 1;
+}
+input {
+  height: 50px;
+  padding: 0 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+input:focus {
+  border-color: #409eff;
+}
+input::-webkit-input-placeholder {
+  color: #aab2bd;
+  font-size: 16px;
+}
+@media screen and (max-width: 768px) {
+  input {
+    height: 40px;
+  }
+}
+textarea {
+  border: 1px solid #ccc;
+  font-size: 16px;
+  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "微软雅黑", "Hiragino Sans GB", "Microsoft YaHei", Arial, sans-serif !important;
+  padding: 0 4px;
+}
+select {
+  height: 30px;
+  padding: 0 10px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  background-color: #fff;
+}
+select opacity {
+  font-size: 14px;
+}
+button {
+  background-color: #409eff;
+  color: #fff;
+  height: 50px;
+  padding: 0 30px;
+  font-size: 16px;
+  letter-spacing: 2px;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+button:hover {
+  background-color: rgba(64, 158, 255, 0.8);
+}
+@media screen and (max-width: 768px) {
+  button {
+    height: 40px;
+  }
+}
+button.v-disable {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+table {
+  border-collapse: collapse;
+}
+.v-radio {
+  width: 40px;
+  height: 20px;
+  border-radius: 10px;
+  background-color: #999;
+  cursor: pointer;
+}
+.v-radio div {
+  float: left;
+  transform: translateX(0px);
+  transition: transform 0.3s;
+  -moz-transition: -moz-transform 0.3s;
+  -webkit-transition: -webkit-transform 0.3s;
+  -o-transition: -o-transform 0.3s;
+  width: 20px;
+  height: 20px;
+  box-shadow: 0px 0px 2px #333;
+  border-radius: 50%;
+  background-color: #fff;
+}
+.v-radio.v-active {
+  background-color: #fff;
+}
+.v-radio.v-active div {
+  transform: translateX(20px);
+  transition: transform 0.3s;
+  -moz-transition: -moz-transform 0.3s;
+  -webkit-transition: -webkit-transform 0.3s;
+  -o-transition: -o-transform 0.3s;
+  background-color: #409eff;
+}
+.v-scrollbar::-webkit-scrollbar {
+  /*滚动条整体样式*/
+  width: 10px;
+  /*高宽分别对应横竖滚动条的尺寸*/
+  height: 10px;
+}
+.v-scrollbar::-webkit-scrollbar-thumb {
+  /*滚动条里面小方块*/
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.05);
+  background: #ccc;
+}
+.v-scrollbar::-webkit-scrollbar-track {
+  /*滚动条里面轨道*/
+  -webkit-box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+  background: #eee;
+}
+#block {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.75);
+  z-index: -1;
+}
+.topBar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 15px 60px;
+  box-sizing: border-box;
+  font-size: 16px;
+  line-height: 30px;
+  color: #bbb;
+  z-index: 1000;
+}
+.topBar #logo {
+  float: left;
+  height: 30px;
+  cursor: pointer;
+}
+.topBar .radio {
+  float: right;
+  margin-top: 5px;
+  margin-right: 20px;
+}
+.topBar .radio i {
+  float: left;
+  font-size: 16px;
+  line-height: 20px;
+  color: #fff;
+}
+.topBar .radio .btn1 {
+  float: left;
+}
+.topBar .nav {
+  float: right;
+}
+.topBar .nav span {
+  float: left;
+  cursor: pointer;
+  margin-left: 10px;
+}
+.topBar .nav span:hover {
+  color: #fff;
+}
+.topBar .nav .active {
+  color: #fff;
+}
+.topBar .info {
+  float: right;
+  margin-left: 20px;
+  cursor: pointer;
+}
+.topBar .info .login {
+  float: left;
+  padding: 0 10px;
+  border: 1px solid #bbb;
+  border-radius: 4px;
+}
+.topBar .info .login i:hover {
+  color: #fff;
+}
+.topBar .info .peoplePic {
+  float: left;
+  height: 24px;
+  vertical-align: middle;
+}
+.topBar .info .peopleName {
+  float: left;
+  max-width: 4em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.topBar .info .peopleName:hover {
+  color: #fff;
+}
+.topBar .afterLogin {
+  position: relative;
+}
+.topBar .afterLogin .downInfo {
+  position: absolute;
+  left: 0;
+  width: 90px;
+  border: 1px solid rgba(187, 187, 187, 0.2);
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 10px;
+}
+.topBar .afterLogin .downInfo > div:hover {
+  color: #fff;
+}
+@media screen and (max-width: 768px) {
+  .topBar {
+    padding: 10px;
+    font-size: 14px;
+  }
+  .topBar #logo {
+    height: 20px;
+  }
+  .topBar .radio {
+    display: none;
+  }
+  .topBar .info .peoplePic {
+    height: 20px;
+  }
+}
+.provider {
+  position: absolute;
+  bottom: 5px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 18px;
+  color: rgba(204, 204, 204, 0.8);
+  z-index: 1 !important;
+}
+.provider #email {
+  color: rgba(204, 204, 204, 0.8);
+  cursor: pointer;
+}
+.provider #email:hover {
+  color: #409eff;
+}
+@media screen and (max-width: 768px) {
+  .provider {
+    font-size: 14px;
+  }
+}
+.notePop {
+  position: fixed;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 300px;
+  max-width: 800px;
+  padding: 0 40px 0 20px;
+  background-color: rgba(103, 194, 58, 0.8);
+  color: #fff;
+  z-index: 1000001;
+}
+.notePop b {
+  line-height: 40px;
+}
+.notePop i {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  background-color: rgba(0, 0, 0, 0.4);
+  color: #fff;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
+  border-radius: 50%;
+  font-size: 14px;
+  cursor: pointer;
+}
+.notePop.err {
+  background-color: rgba(245, 108, 108, 0.8);
+}
+.w_confirmPop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 1000000;
+}
+.w_confirmPop .w_main {
+  position: absolute;
+  min-width: 20%;
+  margin-top: 15vh;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #fff;
+  border-radius: 6px;
+}
+.w_confirmPop .w_main .w_header {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 60px;
+  padding: 20px;
+  line-height: 20px;
+}
+.w_confirmPop .w_main .w_header .w_title {
+  float: left;
+  font-weight: bold;
+}
+.w_confirmPop .w_main .w_header .w_close {
+  float: right;
+  font-size: 30px;
+  cursor: pointer;
+}
+.w_confirmPop .w_main .w_body {
+  padding: 80px 40px 90px 40px;
+  min-height: 200px;
+}
+.w_confirmPop .w_main .w_footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 70px;
+  padding: 10px 20px 20px 20px;
+  text-align: right;
+}
+.w_confirmPop .w_main .w_footer button {
+  font-size: 14px;
+  height: 40px;
+  border-radius: 4px;
+}
+.w_confirmPop .w_main .w_footer .cancel {
+  background-color: #fff;
+  color: #666;
+  border: 1px solid #ddd;
+  margin-left: 10px;
+}
+.w_confirmPop .w_main .w_footer .cancel:hover {
+  border-color: #409eff;
+  background-color: rgba(64, 158, 255, 0.1);
+}
+@media screen and (max-width: 768px) {
+  .w_confirmPop .w_main {
+    width: 95% !important;
+  }
+}
+body {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  padding-bottom: 0 !important;
+  height: 100%;
+}
+.main {
+  max-width: 1366px;
+  height: 100%;
+  z-index: 10px;
+  margin: 0 auto;
+  padding-top: 20px;
+}
+.main .leftLab {
+  float: left;
+  border-right: 2px solid rgba(0, 0, 0, 0.04);
+}
+.main .leftLab span {
+  display: block;
+  width: 100%;
+  line-height: 30px;
+  padding: 16px 60px 16px 0;
+  cursor: pointer;
+}
+.main .leftLab span:hover {
+  font-weight: bold;
+}
+.main .leftLab span i {
+  padding-left: 10px;
+}
+.main .leftLab span.active {
+  font-weight: bold;
+  color: #409eff;
+}
+.main .leftLab span.active i {
+  border-left: 3px solid #409eff;
+}
+.main .right {
+  height: 100%;
+  overflow-y: auto;
+  background-color: #fff;
+  padding: 0 30px 10px 30px;
+}
+.main .right .tableBox {
+  width: 100%;
+  color: #999;
+}
+.main .right .tableBox .imTips {
+  font-size: 14px;
+  line-height: 22px;
+  z-index: 10;
+  margin-bottom: 20px;
+  margin-top: 10px;
+  padding: 20px;
+  background-color: #ecf8ff;
+  border-left: 4px solid rgba(64, 158, 255, 0.8);
+  border-radius: 4px;
+  color: #666;
+}
+.main .right .tableBox .imTips .code {
+  color: #409eff;
+  font-weight: bold;
+  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "微软雅黑", "Hiragino Sans GB", "Microsoft YaHei", Arial, sans-serif;
+}
+.main .right .tableBox .searchBar {
+  background-color: #fff;
+}
+.main .right .tableBox .searchBar input,
+.main .right .tableBox .searchBar select {
+  margin-bottom: 10px;
+  height: 40px;
+  border-radius: 4px;
+}
+.main .right .tableBox .searchBar button {
+  background-color: #409eff;
+  vertical-align: top;
+  border-radius: 4px;
+  height: 40px;
+}
+.main .right .tableBox .searchBar button:hover {
+  background-color: rgba(64, 158, 255, 0.8);
+}
+.main .right .tableBox .searchBar button.resetBtn {
+  background-color: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  color: #666;
+}
+.main .right .tableBox .searchBar button.resetBtn:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+.main .right .tableBox .searchBar .addBtn {
+  float: right;
+  background-color: rgba(64, 158, 255, 0.8);
+}
+.main .right .tableBox .table {
+  margin-top: 10px;
+  width: 100%;
+  overflow: auto;
+}
+.main .right .tableBox .table table {
+  width: 99%;
+  word-break: break-all;
+  border-collapse: collapse;
+  text-align: left;
+  background-color: #fff;
+}
+.main .right .tableBox .table table tr th {
+  text-align: left;
+  padding: 10px 5px;
+  background-color: rgba(64, 158, 255, 0.05);
+}
+.main .right .tableBox .table table tr th:first-child {
+  min-width: 60px;
+  width: 60px;
+}
+.main .right .tableBox .table table tr th select {
+  color: #999;
+  font-size: 14px;
+  font-weight: bold;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background-color: transparent;
+}
+.main .right .tableBox .table table tr .toChart,
+.main .right .tableBox .table table tr .status {
+  text-align: center;
+}
+.main .right .tableBox .table table tr td {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  padding: 10px 5px;
+}
+.main .right .tableBox .table table tr td .key {
+  color: #409eff;
+}
+.main .right .tableBox .table table tr td img {
+  height: 24px;
+  cursor: pointer;
+}
+.main .right .tableBox .table table tr td .btn {
+  color: #fff;
+  font-size: 16px;
+  padding: 6px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 4px;
+  text-decoration: underline;
+  background-color: transparent;
+  color: #245f9b;
+}
+.main .right .tableBox .table table tr td .btn:hover {
+  font-weight: bold;
+}
+.main .right .tableBox .table table tr td a {
+  color: #999;
+}
+.main .right .tableBox .table table tr td a:hover {
+  text-decoration: underline;
+}
+.main .right .tableBox .pageBar {
+  margin-top: 20px !important;
+}
+.main .right .tableBox .pageBar .totalPage {
+  line-height: 35px;
+  margin-right: 20px;
+  float: right;
+}
+.main .right .tableBox .pageBar .page {
+  margin: 0 auto;
+  float: right;
+}
+.main .right .tableBox.token {
+  padding: 60px 40px 0 60px;
+}
+.main .right .tableBox.token .currentToken {
+  margin-bottom: 30px;
+  padding: 40px;
+  word-break: break-all;
+  box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.04);
+}
+.main .right .tableBox.token .currentToken i {
+  font-size: 20px;
+  font-weight: bold;
+}
+.main .right .tableBox.token .currentToken b {
+  margin-right: 20px;
+}
+.main .right .tableBox.token .currentToken .updateBtn {
+  height: 40px;
+  border-radius: 4px;
+}
+.main .right .tableBox.token .currentToken .selfInfo {
+  font-size: 16px;
+  margin-top: 20px;
+  line-height: 30px;
+}
+.main .right .tableBox.token .note {
+  padding: 10px;
+  font-size: 16px;
+  color: rgba(64, 158, 255, 0.8);
+  background-color: rgba(64, 158, 255, 0.1);
+  border: 1px solid rgba(64, 158, 255, 0.1);
+  margin-bottom: 20px;
+}
+.main .right .tableBox.token .downLoad {
+  height: 30px;
+  border-radius: 6px;
+  color: #409eff;
+  cursor: pointer;
+  text-decoration: underline;
+}
+@media screen and (max-width: 768px) {
+  .main {
+    width: 100%;
+    padding-top: 6px;
+  }
+  .main .leftLab {
+    width: 100%;
+    height: auto;
+    padding: 0 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  .main .leftLab span {
+    float: left;
+    width: 33.3%;
+    font-size: 14px;
+    padding: 0;
+    text-align: center;
+  }
+  .main .leftLab span.active i {
+    border-left: none;
+  }
+  .main .right {
+    width: 100%;
+    padding: 5px;
+    margin-top: 4px;
+  }
+  .main .right .tableBox .searchBar input,
+  .main .right .tableBox .searchBar select {
+    width: 100% !important;
+  }
+  .main .right .tableBox .searchBar select {
+    height: 40px !important;
+  }
+  .main .right .tableBox table td {
+    padding: 10px 5px;
+  }
+  .main .right .tableBox.token {
+    padding: 10px;
+  }
+  .main .right .tableBox.token .currentToken {
+    padding: 10px;
+  }
+  .main .right .tableBox.token .currentToken .updateBtn {
+    margin-top: 10px;
+  }
+}
+.editShortUrlPop .editShortUrl,
+.editShortUrlPop .editLongUrl {
+  font-weight: normal;
+  text-align: left;
+}
+.editShortUrlPop .editShortUrl input,
+.editShortUrlPop .editLongUrl input {
+  height: 40px;
+  margin-left: 1px;
+}
+.editShortUrlPop .editLongUrl {
+  margin-top: 20px;
+}
+.editShortUrlPop .editLongUrl b {
+  vertical-align: top;
+}
+.editShortUrlPop .editLongUrl textarea {
+  width: 340px;
+  margin-left: 1px;
+}
+@media screen and (max-width: 768px) {
+  .editShortUrlPop textarea {
+    width: 100% !important;
+  }
+}
+.addUrlPop .radio {
+  font-weight: normal;
+  text-align: center;
+}
+.addUrlPop .radio input[type="radio"] {
+  width: 16px;
+  height: 16px;
+  background-color: transparent;
+  cursor: pointer;
+}
+.addUrlPop .radio label {
+  margin-right: 60px;
+  cursor: pointer;
+}
+.addUrlPop .longUrl {
+  margin-top: 30px;
+}
+.addUrlPop .longUrl b {
+  vertical-align: top;
+}
+.addUrlPop .longUrl textarea {
+  width: 340px;
+}
+@media screen and (max-width: 768px) {
+  .addUrlPop textarea {
+    width: 100% !important;
+  }
+}

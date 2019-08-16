@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="C1N短网址服务平台，随心所欲定制域名，定制网址。c1n.cn为您提供专业、稳定、安全、快速、便捷的短网址服务。轻松帮助您把冗长网址缩短为10个字符以内的短网址,方便您分享和使用。" />
+	<meta name="keywords" content="C1N短网址服务平台" />
+	<meta name="apple-mobile-web-app-capable" content="yes">
+    <title>C1N短网址服务平台</title>
+    <link rel="shortcut icon" href="./img/logo1.png">
+    <link rel="stylesheet" type="text/css" href="css/home.css">
+</head>
+<body>
+    <div id="block"></div>
+    <!-- nav -->
+    <div class="topBar clearfix">
+        <img src="./img/logo1.png" alt="" id="logo">
+        <div class="info beforLogin clearfix" hidden>
+            <span class="login"><i onclick="window.open('./login.html')">登录</i> | <i onclick="window.open('./register.html')">注册</i></span>
+        </div>
+        <div class="info afterLogin clearfix" hidden>
+            <img src="./img/people3.png" alt="" class="peoplePic">
+            <i class="peopleName"></i><img src="./img/down.png" alt="">
+            <div class="downInfo" hidden>
+                <div onclick="window.location.href='./changePassword.html'">修改密码</div>
+                <div class="loginOut">退出</div>
+            </div>
+        </div>
+        <div class="nav clearfix">
+            <span class="active" onclick="window.location.href='./home.html'">短网址</span>
+			<span onclick="window.location.href='./files/c1n短网址平台接口文档.docx'">接口文档</span>
+            <span onclick="window.location.href='./administrators.html'">用户中心</span>
+        </div>
+    </div>
+    <!-- title -->
+    <div class="title">短网址服务平台</div>
+    <!-- 内容 -->
+    <div class="main">
+        <div class="btns">
+            <button class="switchBtn active">短网址</button
+            ><button class="switchBtn">定制网址/域名</button>
+        </div>
+        <div class="opate">
+            <div class="short active">
+                <input type="text" placeholder="请输入长网址" class="site"
+                ><button>确定</button>
+                <div class="result"></div>
+                <div class="friendNote">温馨提示：游客身份生成的短链接不保证永久可用，如需稳定服务，请登录后再生成链接，我们为您提供专业的访问量分析报表以及管理页面。</div>
+            </div>
+            <div class="short">
+                <div class="define">
+                    <select name="" id="select">
+                        <option value="URI">定制网址</option>
+                        <option value="DOMAIN">定制域名</option>
+                    </select>
+                    <span>
+                    </span>
+                </div>
+                <input type="text" placeholder="请输入长网址" class="site" 
+                ><button>确定</button>
+                <div class="result"></div>
+                <div class="friendNote">温馨提示：游客身份生成的短链接不保证永久可用，如需稳定服务，请登录后再生成链接，我们为您提供专业的访问量分析报表以及管理页面。</div>
+            </div>
+        </div>
+
+    </div>
+    <!-- 备案号 -->
+    <div class="provider">©2019 c1n | <a id="email" href="http://www.beian.miit.gov.cn">粤ICP备18037676号</a> | 联系我们:<a href="mailto:c1n_dwz@aliyun.com" id="email">c1n_dwz@aliyun.com</a></div>
+    <!-- 弹窗 -->
+    <div class="notePop err" hidden><b></b><i>x</i></div>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/checkUrl.js"></script>
+    <script type="text/javascript" src="js/clipboard.min.js"></script><!--复制文本-->
+    <script type="text/javascript" src="js/common.js?v=20190806" ></script>
+    <script type="text/javascript" src="js/home.js"></script>
+	
+    
+</body>
+</html>

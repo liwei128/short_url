@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="description" content="c1n.cn为你提供:短网址服务,短网址转换,淘宝网址压缩,数据实时统计,使你更加了解你的用户,准备好提升你的品牌,发掘新的受众了吗" />
+	<meta name="keywords" content="专业流量统计，流量分析报表，访问量统计，数据实时统计,使你更加了解你的用户,准备好提升你的品牌,发掘新的受众了吗" />
+    <title>C1N短网址服务平台</title>
+    <link rel="shortcut icon" href="./img/logo1.png">
+    <link rel="stylesheet" href="./plug/jqueryPagination/jquery.pagination.css" />
+    <link rel="stylesheet" href="./plug/jeDate/skin/jedate.css"/>
+    <link rel="stylesheet" type="text/css" href="css/flowData.css">
+    
+</head>
+<body>
+    <div id="block"></div>
+    
+    <!-- nav -->
+    <div class="topBar clearfix">
+        <img src="./img/logo1.png" alt="" id="logo" onclick="window.location.href='./home.html'">
+        <div class="info beforLogin clearfix" hidden>
+            <span class="login"><i onclick="window.open('./login.html')">登录</i> | <i onclick="window.open('./register.html')">注册</i></span>
+        </div>
+        <div class="info afterLogin clearfix" hidden>
+            <img src="./img/people3.png" alt="" class="peoplePic">
+            <i class="peopleName"></i><img src="./img/down.png" alt="">
+            <div class="downInfo" hidden>
+                <div onclick="window.location.href='./changePassword.html'">修改密码</div>
+                <div class="loginOut">退出</div>
+            </div>
+        </div>
+        <!-- <div class="nav clearfix">
+            <span onclick="window.location.href='./home.html'">短网址</span>
+			<span onclick="window.location.href='./files/c1n短网址平台接口文档.docx'">接口文档</span>
+            <span onclick="window.location.href='./administrators.html'">用户中心</span>
+        </div> -->
+        <div class="radio clearfix">
+            <i>宽屏模式：</i>
+            <div class="v-radio btn1">
+                <div></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="main">
+        <div class="name">短网址分析报表</div>
+        <!-- 总数据统计 -->
+        <div class="totalData">
+            <div class="site clearfix">
+                <i style="background-color:#67C23A"><img src="./img/site.png" alt="" class="peoplePic"></i>
+                <div class="data site">0</div>
+                <div class="title">网址</div>
+            </div>
+            <div class="view">
+                <i style="background-color:#E6A23C"><img src="./img/view.png" alt="" class="peoplePic"></i>
+                <div class="data">0</div>
+                <div class="title">总访问量</div>
+            </div>
+            <div class="ip">
+                <i style="background-color:#F56C6C"><img src="./img/ip.png" alt="" class="peoplePic"></i>
+                <div class="data">0</div>
+                <div class="title">IP数</div>
+            </div>
+            <div class="uv">
+                <i style="background-color:#409EFF"><img src="./img/uv.png" alt="" class="peoplePic"></i>
+                <div class="data">0</div>
+                <div class="title">独立用户(UV)数</div>
+            </div>
+        </div>
+        <!-- 30天内的访问统计 -->
+        <div class="thirtyData model">
+            <div class="modelTop clearfix">
+                <i class="name">30天内的访问统计</i>
+                <div class="timepick">
+                    <input id="daterPicker30" class="selectTime" placeholder="请选择时间" readonly>
+                    <img src="./img/time.png" alt="">
+                </div>
+            </div>
+            <div class="dataView clearfix">
+                <div class="leftSelect p30">
+                    <div class="btnBar clearfix ">
+                        <span class="active">今天</span>
+                        <span>昨天</span>
+                        <span>7天</span>
+                        <span>30天</span>
+                    </div>
+                    <div class="datas clearfix">
+                        <div class="view">
+                            <p class="unm" style="color:#c23531">0</p>
+                            <p class="title">访问量</p>
+                        </div>
+                        <div class="ip">
+                            <p class="unm" style="color:#61a0a8">0</p>
+                            <p class="title">IP数</p>
+                        </div>
+                        <div class="UV">
+                            <p class="unm" style="color:#d48265">0</p>
+                            <p class="title">UV数</p>
+                        </div>
+                    </div>
+                </div>
+                <div id="chart30" class="chart p70"></div>
+            </div>
+        </div>
+        <!-- 24小时内访问统计 -->
+        <div class="hour24Data model">
+            <div class="modelTop clearfix">
+                <i class="name">24小时内访问统计</i>
+                <div class="timepick">
+                    <input id="daterPicker24" class="selectTime" placeholder="请选择时间" readonly>
+                    <img src="./img/time.png" alt="">
+                </div>
+            </div>
+            <div class="dataView clearfix">
+                <div id="chart24" class="chart"></div>
+            </div>
+        </div>
+        <!-- 访问者设备系统分析 -->
+        <div class="equipTypeData model">
+            <div class="modelTop clearfix">
+                <i class="name">访问者设备系统分析</i>
+                <div class="timepick">
+                    <input id="daterPickerEquipType" class="selectTime" placeholder="请选择时间" readonly>
+                    <img src="./img/time.png" alt="">
+                </div>
+            </div>
+            <div class="noData">暂无数据</div>
+            <div class="dataView clearfix">
+                <div id="chartEquipType1" class="chart p60"></div>
+                <div id="chartEquipType2" class="chart p40"></div>
+            </div>
+        </div>
+        <!-- 访问者浏览器统计 -->
+        <div class="browData model">
+            <div class="modelTop clearfix">
+                <i class="name">访问者浏览器统计</i>
+                <div class="timepick">
+                    <input id="daterPickerBrow" class="selectTime" placeholder="请选择时间" readonly>
+                    <img src="./img/time.png" alt="">
+                </div>
+            </div>
+            <div class="noData">暂无数据</div>
+            <div class="dataView clearfix">
+                <div id="chartBrow" class="chart"></div>
+            </div>
+        </div>
+        <!-- 全球访问地区统计 -->
+        <div class="worldMapData model">
+            <div class="modelTop clearfix">
+                <i class="name">全球访问地区统计</i>
+                <div class="timepick">
+                    <input id="daterPickerWorldMap" class="selectTime" placeholder="请选择时间" readonly>
+                    <img src="./img/time.png" alt="">
+                </div>
+            </div>
+            <div class="dataView clearfix">
+                <div id="chartWorldMap" class="chart"></div>
+            </div>
+        </div>
+        <!-- 国内访问地区统计 -->
+        <div class="ChinaMapData model">
+            <div class="modelTop clearfix">
+                <i class="name">国内访问地区统计</i>
+                <div class="timepick">
+                    <input id="daterPickerChinaMap" class="selectTime" placeholder="请选择时间" readonly>
+                    <img src="./img/time.png" alt="">
+                </div>
+            </div>
+            <div class="dataView clearfix">
+                <div id="chartChinaMap_addon" class="chart p40"></div>
+                <div id="chartChinaMap" class="chart p60"></div>
+            </div>
+        </div>
+        <!-- 网络供应商统计 -->
+        <div class="netData model">
+            <div class="modelTop clearfix">
+                <i class="name">网络供应商统计</i>
+                <div class="timepick">
+                    <input id="daterPickerNet" class="selectTime" placeholder="请选择时间" readonly>
+                    <img src="./img/time.png" alt="">
+                </div>
+            </div>
+            <div class="noData">暂无数据</div>
+            <div class="dataView clearfix">
+                <div id="chartNet" class="chart"></div>
+            </div>
+        </div>
+        <!-- 访问记录明细 -->
+        <div class="visitData model">
+            <div class="modelTop clearfix">
+                <i class="name">访问记录明细</i>
+                <div class="timepick">
+                    <input id="daterPickerVisit" class="selectTime" placeholder="请选择时间" readonly>
+                    <img src="./img/time.png" alt="">
+                </div>
+            </div>
+            <div class="noData">暂无数据</div>
+            <div class="dataView clearfix">
+                <div class="table v-scrollbar">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="min-width: 120px;">时间</th>
+                                <th style="min-width: 160px;">网址</th>
+                                <th style="min-width: 90px;">设备</th>
+                                <th style="min-width: 100px;">浏览器</th>
+                                <th style="min-width: 120px">IP</th>
+                                <th style="min-width: 120px">IP归属地</th>
+                                <th style="min-width: 240px">访问来源</th>
+                                <th style="min-width: 100px;width:100px">跳转状态</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
+                <!-- 页码 -->
+                <div class="pageBar clearfix">
+                    <div id="visitPage" class="page fl"></div>
+                    <i class="totalPage">共 <span>1</span> 条</i>
+                </div>
+            </div>
+        </div>
+        <!-- 高频访问IP名单 -->
+        <div class="IPData model">
+            <div class="modelTop clearfix">
+                <i class="name">高频访问IP</i>
+                <div class="timepick">
+                    <input id="daterPickerIP" class="selectTime" placeholder="请选择时间" readonly>
+                    <img src="./img/time.png" alt="">
+                </div>
+            </div>
+            <div class="noData">暂无数据</div>
+            <div class="dataView clearfix">
+                <div class="table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="min-width: 120px;">IP地址</th>
+                                <th style="min-width: 200px">归属地</th>
+                                <th style="min-width: 100px;width:200px">次数</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 弹窗 -->
+    <div class="notePop err" hidden><b></b><i>x</i></div>
+
+    <script src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/moment.min.js"></script>
+    <script type="text/javascript" src="./plug/jeDate/src/jedate.js"></script>
+    <script type="text/javascript" src="js/echarts.min.js"></script>
+    <script type="text/javascript" src="js/checkUrl.js"></script>
+    <script type="text/javascript" src="./plug/jqueryPagination/jquery.pagination.min.js"></script>
+    <script type="text/javascript" src="js/common.js" ></script>
+    <script type="text/javascript" src="./js/flowData.js"></script>
+</body>
+</html>

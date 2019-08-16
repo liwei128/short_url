@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="C1N短网址服务平台，随心所欲定制域名，定制网址。c1n.cn为您提供专业、稳定、安全、快速、便捷的短网址服务。轻松帮助您把冗长网址缩短为10个字符以内的短网址,方便您分享和使用。" />
+	<meta name="keywords" content="C1N短网址服务平台" />
+	<meta name="apple-mobile-web-app-capable" content="yes">
+    <title>C1N短网址服务平台</title>
+    <link rel="shortcut icon" href="./img/logo1.png">
+    <link rel="stylesheet" type="text/css" href="css/login.css">
+</head>
+<body>
+    <div id="pageName" hidden>login</div>
+    <div class="board">
+        <div class="title">
+            <img src="./img/default_avatar.png" alt="">
+            <div class="webName">c1n.cn</div>
+        </div>
+        <div class="form">
+            <input type="text" id="name" placeholder="用户名"/>
+            <input type="password" id="pwd" placeholder="密码"/>
+            <button >登录</button>
+        </div>
+        <div class="other">
+            <span onclick="window.location.href='./resetPassword.html'">忘记密码？</span>
+            <span onclick="window.location.href='./register.html'">注册新账号</span>
+        </div>
+    </div>
+
+    <!-- 弹窗 -->
+    <div class="notePop err" hidden><b></b><i>x</i></div>
+
+    <script  type="text/javascript" src="js/jquery.min.js"></script>
+    <script  type="text/javascript" src="js/checkUrl.js"></script>
+    <script  type="text/javascript" type="text/javascript" src="js/md5.js"></script>
+    <script  type="text/javascript" src="js/common.js" ></script>
+    <script  type="text/javascript" src="js/login.js"></script>
+</body>
+</html>
+
+<script>
+    $(function(){
+        // 进来判断是否是登录装填
+        ajaxPost("/manage/user/currentUser","",function(data){
+            if(!data.code){
+                var url = sessionStorage.getItem("c1n_url");
+                window.location.href = url || "./home.html";
+            }
+        });
+
+        $('input').keypress(function(event){
+            var keycode = (event.keyCode ? event.keyCode : event.which);
+            if(keycode == '13'){
+                $(".form>button").click()
+            }
+        });
+    })
+</script>

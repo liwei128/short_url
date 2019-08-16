@@ -1,0 +1,326 @@
+@import "common.less";
+body {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    padding-bottom: 0 !important;
+    height: 100%;
+}
+.main {
+    max-width: 1366px;
+    height: 100%;
+    z-index: 10px;
+    margin: 0 auto;
+    padding-top: 20px;
+    .leftLab {
+        float: left;
+        border-right: 2px solid rgba(0,0,0,0.04);
+        span {
+            display: block;
+            width: 100%;
+            line-height: 30px;
+            padding: 16px 60px 16px 0;
+            cursor: pointer;
+            &:hover{
+                font-weight: bold;
+            }
+            i {
+                padding-left: 10px;
+            }
+        }
+        span.active {
+            font-weight: bold;
+            color: @mainColor;
+            i {
+                border-left: 3px solid @mainColor;
+            }
+        }
+    }
+    .right {
+        height: 100%;
+        overflow-y: auto;
+        background-color: #fff;
+        padding: 0 30px 10px 30px;
+        .tableBox {
+            width: 100%;
+            color: #999;
+            .imTips {
+                // box-shadow: 0 0 6px @mainColor5;
+                font-size: 14px;
+                line-height: 22px; 
+                z-index: 10;
+                margin-bottom: 20px;
+                margin-top: 10px;
+                padding: 20px;
+                background-color: #ecf8ff;
+                // background-color: rgba(64,158,255, 0.05);
+                border-left: 4px solid @mainColor8;
+                border-radius: 4px;
+                color: #666;
+                .code {
+                    color: @mainColor;
+                    font-weight: bold;
+                    font-family: "Helvetica Neue",Helvetica,"PingFang SC","微软雅黑","Hiragino Sans GB","Microsoft YaHei",Arial,sans-serif;
+                }
+            }
+            .searchBar {
+                background-color: #fff;
+                input,select {
+                    // width: 300px;
+                    margin-bottom: 10px;
+                    height: 40px;
+                    border-radius: 4px;
+                }
+                button {
+                    background-color: @mainColor;
+                    vertical-align: top;
+                    border-radius: 4px;
+                    height: 40px;
+                    &:hover {
+                        background-color: @mainColor8;
+                    }
+                }
+                button.resetBtn {
+                    background-color: transparent;
+                    border: 1px solid rgba(0,0,0,0.2);
+                    color: #666;
+                    &:hover {
+                        background-color: rgba(0,0,0,0.05);
+                    }
+                }
+                .addBtn {
+                    float: right;
+                    background-color: @mainColor8;
+                }
+            }
+            .table {
+                margin-top: 10px;
+                width: 100%;
+                overflow: auto;
+                table {
+                    // min-width: 100%;
+                    width: 99%;
+                    word-break:break-all;
+                    border-collapse:collapse;
+                    text-align: left;
+                    background-color: #fff;
+                    tr {
+                        th {
+                            text-align: left;//兼容ie
+                            padding: 10px 5px;
+                            background-color: rgba(64,158,255, 0.05);;
+                            &:first-child {
+                                min-width: 60px;
+                                width: 60px;
+                            }
+                            select {
+                                color: #999;
+                                font-size: 14px; 
+                                font-weight: bold;
+                                border: 1px solid rgba(0,0,0,0.08);
+                                background-color: transparent;
+                            }    
+                        }
+                        .toChart,.status {
+                            text-align: center;
+                        }
+                        td {
+                            border-bottom: 1px solid rgba(0,0,0,0.05);
+                            padding: 10px 5px;
+                            .key {
+                                color: @mainColor;
+                            }
+                            img {
+                                height: 24px;
+                                cursor: pointer;
+                            }
+                            .btn {
+                                color: #fff;
+                                font-size: 16px;
+                                padding: 6px;
+                                border-radius: 4px;
+                                cursor: pointer;
+                                margin-right: 4px;
+                                text-decoration: underline;
+                                background-color: transparent;
+                                color: rgb(36, 95, 155);
+                                &:hover {
+                                    font-weight: bold;
+                                }
+                            }
+                            a {
+                                color: #999;
+                                &:hover {
+                                    text-decoration: underline;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .pageBar {
+                margin-top: 20px !important;
+                .totalPage {
+                    line-height: 35px;
+                    margin-right: 20px;
+                    float: right;
+                }
+                .page {
+                    margin: 0 auto;
+                    float: right;
+                }
+            }
+        }
+        .tableBox.token {
+            padding: 60px 40px 0 60px;
+            .currentToken {
+                margin-bottom: 30px;
+                padding: 40px;
+                word-break:break-all;
+                box-shadow: 4px 4px 4px 4px  rgba(0,0,0,0.04);
+                i {
+                    font-size: 20px;
+                    font-weight: bold;
+                }
+                b {
+                    margin-right: 20px;
+                }
+                .updateBtn {
+                    height: 40px;
+                    border-radius: 4px;
+                }
+                .selfInfo {
+                    font-size: 16px;
+                    margin-top: 20px;
+                    line-height: 30px;
+                }
+            }
+            .note {
+                padding: 10px;
+                font-size: 16px;
+                color: @mainColor8;
+                background-color: @mainColor1;
+                border: 1px solid @mainColor1;
+                margin-bottom: 20px;
+            }
+            .downLoad {
+                height: 30px;
+                border-radius: 6px;
+                color: @mainColor;
+                cursor: pointer;
+                text-decoration: underline;
+            }
+        }
+    }
+
+    @media screen and (max-width: 768px) { 
+        width: 100%;
+        padding-top: 6px;
+        .leftLab {
+            width: 100%;
+            height: auto;
+            padding: 0 10px;
+            border-bottom: 1px solid #ddd;
+            span {
+                float: left;
+                width: 33.3%;
+                font-size: 14px;
+                padding: 0;
+                text-align: center;
+            }
+            span.active {
+                i {
+                    border-left: none;
+                }
+            }
+        }
+        .right {
+            width: 100%;
+            padding: 5px;
+            margin-top: 4px;
+            .tableBox {
+                .searchBar {
+                    input,select {
+                        width: 100% !important;
+                    }
+                    select {
+                        height: 40px !important;
+                    }
+                    button {
+                        // width: 100%;
+                        // padding: 0;
+
+                    }
+                }
+                table {
+                    td {
+                        padding: 10px 5px;
+                    }
+                }
+            }
+            .tableBox.token {
+                padding: 10px;
+                .currentToken {
+                    padding: 10px;
+                    .updateBtn {
+                        margin-top: 10px;
+                    }
+                }
+            }
+        }
+    }
+}
+.editShortUrlPop {
+    .editShortUrl,.editLongUrl {
+        font-weight: normal;
+        text-align: left;
+        input {
+            height: 40px;
+            margin-left: 1px;
+        }
+    }
+    .editLongUrl {
+        margin-top: 20px;
+        b {
+            vertical-align: top;
+        }
+        textarea {
+            width: 340px;
+            margin-left: 1px;
+        }
+    }
+    @media screen and (max-width: 768px){
+        textarea {
+            width: 100% !important;
+        }
+    }
+}
+.addUrlPop {
+    .radio {
+        font-weight: normal;
+        text-align: center;
+        input[type="radio"] {
+            width: 16px;
+            height: 16px;
+            background-color: transparent;
+            cursor: pointer;
+        }
+        label {
+            margin-right: 60px;
+            cursor: pointer;
+        }
+    }
+    .longUrl {
+        margin-top: 30px;
+        b {
+            vertical-align: top;
+        }
+        textarea {
+            width: 340px;
+        }
+    }
+    @media screen and (max-width: 768px){
+        textarea {
+            width: 100% !important;
+        }
+    }
+}
