@@ -50,10 +50,16 @@
 * html页面需要修改的配置（将域名url.com替换为自己的一级域名）
     * html->js->common.js第1行
     * html->js->checkUrl.js第1行
-    * html->administrators.html.js第90行
+    * html->administrators.html第90行
     * html->files->接口文档.doc
     
-* nginx配置（将域名url.com替换为自己的一级域名）
+* nginx配置
     * 配置示例nginx_config->url.conf
-    
+    * 将域名url.com替换为自己的一级域名
+    * nginx_config->url.conf第43行修改前端文件地址
+* 域名解析配置示例
+    ```html
+    *.url.com 127.0.0.1
+    @.url.com 127.0.0.1
+    ```
 
