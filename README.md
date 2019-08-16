@@ -15,4 +15,10 @@
 [![url](https://raw.githubusercontent.com/liwei128/short_url/master/img/flowData.png)](https://raw.githubusercontent.com/liwei128/short_url/master/img/flowData.png)
 
 ### 2、快速部署
+> 2.1 环境准备：
+
+    申请域名（需备案）<br/>
+    服务器资源<br/>
+    软件环境：mysql、redis、nginx、JDK1.8<br/>
+    
 
