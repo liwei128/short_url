@@ -67,6 +67,20 @@ public interface ShortLinkService {
 	 * @return
 	 */
 	ResultData<Void> addBlacklist(Long id);
+	
+	/**
+	 * 一键加入黑名单
+	 * @param safeId
+	 * @return
+	 */
+	ResultData<Void> addBlacklist(String safeId);
+
+	/**
+	 * 禁用短网址
+	 * @param safeId
+	 * @return
+	 */
+	ResultData<Void> disabled(String safeId);
 
 
 	

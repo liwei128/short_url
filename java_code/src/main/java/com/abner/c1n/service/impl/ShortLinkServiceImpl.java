@@ -241,6 +241,24 @@ public class ShortLinkServiceImpl implements ShortLinkService{
 		}
 		return ResultData.getInstance(BaseRetCode.FAIL);
 	}
+	
+	@Override
+	public ResultData<Void> addBlacklist(String safeId) {
+		String id = redisDao.get(safeId);
+		if(StringUtils.isEmpty(id)){
+			return ResultData.getInstance(BaseRetCode.URL_FAILURE);
+		}
+		return addBlacklist(Long.parseLong(id));
+	}
+
+	@Override
+	public ResultData<Void> disabled(String safeId) {
+		String id = redisDao.get(safeId);
+		if(StringUtils.isEmpty(id)){
+			return ResultData.getInstance(BaseRetCode.URL_FAILURE);
+		}
+		return modifyStatus(Long.parseLong(id), Status.DISABLED);
+	}
 
 	
 

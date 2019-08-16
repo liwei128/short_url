@@ -4,15 +4,21 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.TimeUnit;
+
+import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import com.abner.c1n.beans.constant.UserConstant;
 import com.abner.c1n.beans.po.UrlEntity;
 import com.abner.c1n.config.SystemConfig;
 import com.abner.c1n.config.thread.AsyncThreadPool;
+import com.abner.c1n.dao.RedisDao;
 import com.abner.c1n.service.MailSendService;
+import com.abner.c1n.utils.EncryptionUtils;
 import com.google.common.collect.Lists;
 
 
@@ -32,6 +38,9 @@ public class ShortUrlReviewTask {
 	
 	@Autowired
 	private SystemConfig systemConfig;
+	
+	@Resource
+	private RedisDao redisDao;
 	
 	private final static int MAX_URL_COUNT = 16;
 	
@@ -80,8 +89,9 @@ public class ShortUrlReviewTask {
 		StringBuilder builder = new StringBuilder("<table border='1' cellspacing='0' cellpadding='0'>");
 		builder.append("<tr><th>时间</th><th>短网址</th><th>原网址</th><th>用户ID</th><th>操作</th></tr>");
 		urls.forEach(url->{
-			String disabledBody  = String.format(DISABLED, systemConfig.getDisabledUrl(),url.getId());
-			String blacklistBody  = String.format(BLACKLIST, systemConfig.getBlacklistUrl(),url.getId());
+			String id = generateSafeId(url.getId());
+			String disabledBody  = String.format(DISABLED, systemConfig.getDisabledUrl(),id);
+			String blacklistBody  = String.format(BLACKLIST, systemConfig.getBlacklistUrl(),id);
 			builder.append("<tr>")
 			.append("<td>").append(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(url.getCreateTime())).append("</td>")
 			.append("<td>").append(url.getShortUrl()).append("</td>")
@@ -94,6 +104,16 @@ public class ShortUrlReviewTask {
 		return builder.toString();
 	}
 
+	/**
+	 * 生成安全ID
+	 * @param id
+	 * @return
+	 */
+	private String generateSafeId(Long id) {
+		String safeId = UserConstant.SAFE_ID+id+EncryptionUtils.random(6);
+		redisDao.set(safeId, String.valueOf(id), 12, TimeUnit.HOURS);
+		return safeId;
+	}
 	/**
 	 * 获取队列中的短网址
 	 * @return

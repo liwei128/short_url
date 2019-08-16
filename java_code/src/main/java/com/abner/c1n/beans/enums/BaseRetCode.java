@@ -41,7 +41,12 @@ public enum BaseRetCode implements RetCode{
 	/**
 	 * 非法请求
 	 */
-	ERROR_ACCESS(7,"非法请求");
+	ERROR_ACCESS(7,"非法请求"),
+	
+	/**
+	 * 链接已失效
+	 */
+	URL_FAILURE(8,"链接已失效");
 	
 	private int code;
 	

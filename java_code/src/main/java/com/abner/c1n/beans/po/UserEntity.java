@@ -109,7 +109,7 @@ public class UserEntity extends BaseEntity{
 	}
 	
 	public String generateToken(){
-		return EncryptionUtils.md5(UserConstant.TOKEN+this.name);
+		return UserConstant.TOKEN+EncryptionUtils.md5(this.name);
 	}
 
 	public UserEntity() {

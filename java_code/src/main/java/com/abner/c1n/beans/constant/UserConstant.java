@@ -33,6 +33,11 @@ public class UserConstant {
 	public final static String CODE = "code";
 	
 	/**
+	 * 用于生成安全ID
+	 */
+	public final static String SAFE_ID = "ID";
+	
+	/**
 	 * 管理员id
 	 */
 	public final static Long ADMIN_ID = 1L;

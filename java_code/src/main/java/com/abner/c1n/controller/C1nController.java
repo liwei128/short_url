@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.abner.c1n.annotation.Slf4j;
 import com.abner.c1n.beans.dto.shorturl.LinkDto;
-import com.abner.c1n.beans.po.UrlEntity.Status;
 import com.abner.c1n.beans.vo.common.ResultData;
 import com.abner.c1n.service.LogInfoService;
 import com.abner.c1n.service.ShortLinkService;
@@ -47,8 +46,8 @@ public class C1nController {
 	 */
 	@RequestMapping("/link/disabled")
 	@ResponseBody
-	public ResultData<Void> disabled(Long id) {
-		return shortLinkService.modifyStatus(id, Status.DISABLED);
+	public ResultData<Void> disabled(String id) {
+		return shortLinkService.disabled(id);
 	}
 	
 	/**
@@ -58,7 +57,7 @@ public class C1nController {
 	 */
 	@RequestMapping("/link/addBlacklist")
 	@ResponseBody
-	public ResultData<Void> addBlacklist(Long id) {
+	public ResultData<Void> addBlacklist(String id) {
 		return shortLinkService.addBlacklist(id);
 	}
 	
