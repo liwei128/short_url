@@ -47,11 +47,10 @@
     IP信息查询  官网http://user.ip138.com/   token需要去官网注册获取
     ip138.token=******
     ```
-* html页面需要修改的配置
-    将域名url.com修改为自己的域名
-    html->js->common.js第二行
-    html->js->checkUrl.js第一行
-    html->files->接口文档.doc
+* html页面需要修改的配置（将域名url.com修改为自己的域名）
+    * html->js->common.js第二行
+    * html->js->checkUrl.js第一行
+    * html->files->接口文档.doc
     
 * 软件环境：mysql、redis、nginx、JDK1.8
     
