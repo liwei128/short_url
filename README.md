@@ -21,6 +21,7 @@
 * 软件环境：mysql、redis、nginx、JDK1.8
 
 > 2.2 数据库配置
+
     1. 新建数据库shorturl
     2. 执行sql,文件位置db->db.sql
     
