@@ -12,4 +12,4 @@
 
 > 3.访问量分析报表：访问量统计、访问设备统计、浏览器、国家、地区、网络供应商、访问记录明细、高频访问ip 应有尽有。
 
-[![url](https://raw.githubusercontent.com/liwei128/short_url/master/img/monitor.png)](https://raw.githubusercontent.com/liwei128/short_url/master/img/monitor.png)
+[![url](https://raw.githubusercontent.com/liwei128/short_url/master/img/flowData.png)](https://raw.githubusercontent.com/liwei128/short_url/master/img/flowData.png)
