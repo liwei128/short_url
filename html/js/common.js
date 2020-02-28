@@ -1,6 +1,6 @@
 var domain = "url.com";
 //后台接口url
-var reqUrl = "http://www."+domain;
+var reqUrl = "http://"+domain;
 
 // topBar栏的相关逻辑
 function topBarAction(){
